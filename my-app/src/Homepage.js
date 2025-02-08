@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
-import { auth } from "../firebase"; // Assuming firebase.js is in the parent folder
+import { auth } from "./firebase"; // Assuming firebase.js is in the parent folder
 import "./Homepage.css";
 
 const Homepage = () => {
