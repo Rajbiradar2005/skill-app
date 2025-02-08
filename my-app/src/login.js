@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase'; // Adjust the path if needed
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import './login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
