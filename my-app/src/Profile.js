@@ -141,7 +141,7 @@ const Profile = () => {
       )}
 
       {/* Home Button */}
-      <button className="home-button" onClick={() => navigate("/")}>
+      <button className="home-button" onClick={() => navigate("/Homepage")}>
         Go to Homepage
       </button>
     </div>
