@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { auth } from "./firebase";  // Adjust the path if needed
 import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import "./Profile.css";
 
 const Profile = () => {
@@ -9,10 +10,11 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     bio: "",
-    offeredServices: [],
-    requestedServices: [],
+    offeredServices: "",
+    requestedServices: "",
   });
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Hook for navigation
 
   useEffect(() => {
     const fetchProfile = async (currentUser) => {
@@ -137,6 +139,11 @@ const Profile = () => {
       ) : (
         <button onClick={handleEdit}>Edit Profile</button>
       )}
+
+      {/* Home Button */}
+      <button className="home-button" onClick={() => navigate("/")}>
+        Go to Homepage
+      </button>
     </div>
   );
 };
