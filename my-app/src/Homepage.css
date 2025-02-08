@@ -1,0 +1,92 @@
+/* Homepage.css */
+.homepage-container {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+  }
+  
+  .homepage-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+  }
+  
+  .homepage-header h1 {
+    font-size: 32px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .profile-menu {
+    position: relative;
+  }
+  
+  .profile-icon {
+    cursor: pointer;
+    font-size: 35px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+  
+  .profile-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  .profile-options {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  .profile-options button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .profile-options button:hover {
+    background-color: #ff7e5f;
+    border-radius: 5px;
+  }
+  
+  .homepage-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .homepage-footer {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .ghost-profile {
+    font-size: 40px;
+    display: inline-block;
+    background-color: #ff7e5f;
+    padding: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
+  }

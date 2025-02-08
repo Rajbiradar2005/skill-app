@@ -5,6 +5,7 @@ import Signup from './Signup';
 import Profile from './Profile'; // Import Profile component
 import { auth } from './firebase'; // Firebase auth import
 import './App.css';
+import Homepage from './Homepage';
 
 // Private route component
 const PrivateRoute = ({ element }) => {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/Profile" element={<PrivateRoute element={<Profile />} />} /> {/* Restricted route */}
+          <Route path="/Homepage" element={<Homepage />} /> {/* Add the homepage route */}
         </Routes>
       </main>
 
