@@ -1,4 +1,3 @@
-// src/Login.js
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase'; // Ensure the path matches where your firebase.js is located
