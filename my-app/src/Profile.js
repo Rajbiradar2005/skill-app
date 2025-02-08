@@ -6,8 +6,12 @@ import "./Profile.css";
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
-  const [bio, setBio] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    bio: "",
+    offeredServices: [],
+    requestedServices: [],
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,17 +19,20 @@ const Profile = () => {
       try {
         if (currentUser) {
           setUser(currentUser);
-          // Simulating an API call to fetch profile data
+          // Simulated API response (Replace with actual fetch from Firebase)
           const userProfile = {
             name: currentUser.displayName || "User",
             email: currentUser.email,
-            offeredServices: ["Web Development", "Graphic Design"], // Example
-            requestedServices: ["Video Editing"],
-            rating: 4.5,
+            offeredServices: ["offered service"],
+            requestedServices: ["requested service"],
             bio: "This is my bio.",
           };
           setProfile(userProfile);
-          setBio(userProfile.bio);
+          setFormData({
+            bio: userProfile.bio,
+            offeredServices: userProfile.offeredServices.join(", "),
+            requestedServices: userProfile.requestedServices.join(", "),
+          });
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -49,15 +56,33 @@ const Profile = () => {
 
   const handleEdit = () => setIsEditing(true);
 
+  const handleCancel = () => {
+    // Restore original values on cancel
+    setFormData({
+      bio: profile.bio,
+      offeredServices: profile.offeredServices.join(", "),
+      requestedServices: profile.requestedServices.join(", "),
+    });
+    setIsEditing(false);
+  };
+
   const handleSave = async () => {
     try {
-      // Example function to update profile in Firebase (implement this in your backend)
-      // await updateUserProfile(user.uid, { bio });
+      // Convert comma-separated services into arrays
+      const updatedProfile = {
+        ...profile,
+        bio: formData.bio,
+        offeredServices: formData.offeredServices.split(",").map((s) => s.trim()),
+        requestedServices: formData.requestedServices.split(",").map((s) => s.trim()),
+      };
 
-      setProfile((prev) => ({ ...prev, bio }));
+      // Example Firebase update function (Replace with actual API call)
+      // await updateUserProfile(user.uid, updatedProfile);
+
+      setProfile(updatedProfile);
       setIsEditing(false);
     } catch (error) {
-      console.error("Error updating bio:", error);
+      console.error("Error updating profile:", error);
     }
   };
 
@@ -69,23 +94,49 @@ const Profile = () => {
       <h2>Welcome, {profile.name}!</h2>
       <div className="profile-info">
         <p><strong>Email:</strong> {profile.email}</p>
-        <p><strong>Offered Services:</strong> {profile.offeredServices.join(", ")}</p>
-        <p><strong>Requested Services:</strong> {profile.requestedServices.join(", ")}</p>
-        <p><strong>Rating:</strong> {profile.rating}</p>
+        
+        <p><strong>Offered Services:</strong></p>
+        {isEditing ? (
+          <input 
+            type="text"
+            value={formData.offeredServices}
+            onChange={(e) => setFormData({ ...formData, offeredServices: e.target.value })}
+          />
+        ) : (
+          <p>{profile.offeredServices.join(", ")}</p>
+        )}
+
+        <p><strong>Requested Services:</strong></p>
+        {isEditing ? (
+          <input 
+            type="text"
+            value={formData.requestedServices}
+            onChange={(e) => setFormData({ ...formData, requestedServices: e.target.value })}
+          />
+        ) : (
+          <p>{profile.requestedServices.join(", ")}</p>
+        )}
+
         <p><strong>Bio:</strong></p>
         {isEditing ? (
           <textarea 
-            value={bio} 
-            onChange={(e) => setBio(e.target.value)} 
+            value={formData.bio} 
+            onChange={(e) => setFormData({ ...formData, bio: e.target.value })} 
             rows="3"
           />
         ) : (
-          <p>{bio}</p>
+          <p>{profile.bio}</p>
         )}
       </div>
-      <button onClick={isEditing ? handleSave : handleEdit}>
-        {isEditing ? "Save" : "Edit Profile"}
-      </button>
+
+      {isEditing ? (
+        <div>
+          <button onClick={handleSave}>Save</button>
+          <button onClick={handleCancel} className="cancel-button">Cancel</button>
+        </div>
+      ) : (
+        <button onClick={handleEdit}>Edit Profile</button>
+      )}
     </div>
   );
 };
