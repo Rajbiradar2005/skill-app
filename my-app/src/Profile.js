@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { auth } from "./firebase";  // Adjust the path if needed
+import { auth, db, setDoc, doc, getDoc } from "./firebase";  // Import Firestore methods
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import "./Profile.css";
@@ -15,23 +15,34 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); // Hook for navigation
 
+  // Fetch user profile data from Firestore
   useEffect(() => {
     const fetchProfile = async (currentUser) => {
       try {
         if (currentUser) {
           setUser(currentUser);
-          // Simulated API response (Replace with actual fetch from Firebase)
-          const userProfile = {
-            name: currentUser.displayName || "User",
-            email: currentUser.email,
-            offeredServices: ["offered service"],
-            bio: "This is my bio.",
-          };
-          setProfile(userProfile);
-          setFormData({
-            bio: userProfile.bio,
-            offeredServices: userProfile.offeredServices.join(", "),
-          });
+
+          // Reference the user profile in Firestore
+          const profileRef = doc(db, "profiles", currentUser.uid);  // Path to Firestore user profile
+          const docSnapshot = await getDoc(profileRef);
+
+          if (docSnapshot.exists()) {
+            // If profile exists in Firestore, update the state with data
+            const userProfile = docSnapshot.data();
+            setProfile(userProfile);
+            setFormData({
+              bio: userProfile.bio || "",
+              offeredServices: userProfile.offeredServices?.join(", ") || "",
+            });
+          } else {
+            // If profile doesn't exist, set default profile data
+            setProfile({
+              name: currentUser.displayName || "User",
+              email: currentUser.email,
+              offeredServices: [],
+              bio: "",
+            });
+          }
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -58,26 +69,26 @@ const Profile = () => {
   const handleCancel = () => {
     // Restore original values on cancel
     setFormData({
-      bio: profile.bio,
-      offeredServices: profile.offeredServices.join(", "),
+      bio: profile?.bio || "",
+      offeredServices: profile?.offeredServices?.join(", ") || "",
     });
     setIsEditing(false);
   };
 
   const handleSave = async () => {
     try {
-      // Convert comma-separated services into arrays
       const updatedProfile = {
         ...profile,
         bio: formData.bio,
-        offeredServices: formData.offeredServices.split(",").map((s) => s.trim()),
+        offeredServices: formData.offeredServices.split(",").map((s) => s.trim()), // Convert to array
       };
 
-      // Example Firebase update function (Replace with actual API call)
-      // await updateUserProfile(user.uid, updatedProfile);
+      // Save the updated profile to Firestore
+      await setDoc(doc(db, "profiles", user.uid), updatedProfile);
 
       setProfile(updatedProfile);
       setIsEditing(false);
+      alert("Profile saved successfully!");
     } catch (error) {
       console.error("Error updating profile:", error);
     }
