@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore"; // Import Firestore
+import { getAuth } from "firebase/auth"; // Import Auth
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -10,7 +11,6 @@ const firebaseConfig = {
   projectId: "skill-swap-362b3",
   storageBucket: "skill-swap-362b3.appspot.com",
   messagingSenderId: "791003642718",
- 
   appId: "1:791003642718:web:592f750b66150fd4e86dcf",
   measurementId: "G-XZVRR0EV22"
 };
@@ -18,7 +18,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const auth = getAuth(app);
+const auth = getAuth(app); // Initialize Auth
 const db = getFirestore(app); // Initialize Firestore
 
-export {auth, db }; // Export Firestore instance
+export { auth, db }; // Export Auth and Firestore instances
