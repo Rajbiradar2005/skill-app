@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { auth, getUserProfile, updateUserProfile } from "../authService";
-import "./Profile.css"; // Import the CSS file
+import { auth } from "../firebase";  // Adjust the path if needed
+import { onAuthStateChanged } from "firebase/auth";
+import "./Profile.css";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -13,12 +14,25 @@ const Profile = () => {
       const currentUser = auth.currentUser;
       if (currentUser) {
         setUser(currentUser);
-        const userProfile = await getUserProfile(currentUser.uid);
-        setProfile(userProfile);
-        setBio(userProfile.bio || "");
+        // Here you can fetch the profile data based on `currentUser.uid`
+        // Assuming you have a function to fetch profile details
+        // const userProfile = await getUserProfile(currentUser.uid);
+        // setProfile(userProfile);
+        // setBio(userProfile.bio || "");
       }
     };
-    fetchProfile();
+
+    // Listen for auth state changes (e.g., on login/logout)
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        fetchProfile();
+      } else {
+        setUser(null);
+      }
+    });
+
+    return unsubscribe; // Cleanup listener on unmount
   }, []);
 
   const handleEdit = () => {
@@ -26,7 +40,8 @@ const Profile = () => {
   };
 
   const handleSave = async () => {
-    await updateUserProfile(user.uid, { bio });
+    // Save the updated bio to Firebase
+    // await updateUserProfile(user.uid, { bio });
     setIsEditing(false);
   };
 

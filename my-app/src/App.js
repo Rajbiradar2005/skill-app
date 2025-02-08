@@ -1,8 +1,15 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import Login from './login';
 import Signup from './Signup';
+import Profile from './Profile'; // Import Profile component
+import { auth } from './firebase'; // Firebase auth import
 import './App.css';
+
+// Private route component
+const PrivateRoute = ({ element }) => {
+  return auth.currentUser ? element : <Navigate to="/login" />;
+};
 
 function App() {
   return (
@@ -20,6 +27,7 @@ function App() {
           <Route path="/" element={<h2>Welcome to the Skill App</h2>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/Profile" element={<PrivateRoute element={<Profile />} />} /> {/* Restricted route */}
         </Routes>
       </main>
 
