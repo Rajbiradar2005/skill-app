@@ -2,40 +2,70 @@
 
 .App {
   text-align: center;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: #333;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* 🔹 Header with Gradient Background */
 .App-header {
-  background-color: #282c34;
+  background: linear-gradient(90deg, #4b6cb7, #182848);
   padding: 20px;
   color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
+/* 🔹 Navbar */
 .navbar {
+  display: flex;
+  justify-content: center;
   margin-top: 10px;
 }
 
+/* 🔹 Navigation Links */
 .nav-link {
   color: white;
-  margin: 0 15px;
+  margin: 0 20px;
   text-decoration: none;
   font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
+/* 🔹 Hover Effect */
 .nav-link:hover {
-  text-decoration: underline;
+  color: #ffcc00;
+  transform: scale(1.1);
 }
 
+/* 🔹 Main Content Area */
 .App-main {
-  padding: 20px;
+  flex: 1;
+  padding: 40px 20px;
 }
 
+/* 🔹 Fancy Footer */
 .App-footer {
-  background-color: #282c34;
+  background: linear-gradient(90deg, #182848, #4b6cb7);
   color: white;
-  padding: 10px;
-  position: fixed;
+  padding: 15px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
   width: 100%;
+  position: fixed;
   bottom: 0;
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 16px;
+    margin: 0 10px;
+  }
 }
