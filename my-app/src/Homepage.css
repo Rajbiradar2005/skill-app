@@ -1,167 +1,103 @@
-/* Homepage.css */
 .homepage-container {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff7e5f, #feb47b);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: #fff;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f4f4f4;
-  }
-  
-  .homepage-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    align-items: center;
-    background: linear-gradient(90deg, #4bb76b, #0c7c3a);
-    color: white;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .homepage-header h1 {
-    font-size: 32px;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  }
-  
-  .profile-menu {
-    position: relative;
-  }
-  
-  .profile-icon {
-    cursor: pointer;
-    font-size: 24px;
-    background-color: transparent;
-    border: none;
-    color: white;
-    padding: 5px;
-    border-radius: 50%;
-    transition: transform 0.3s;
-  }
-  
-  .profile-icon:hover {
-    transform: scale(1.1);
-  }
-  
-  .profile-options {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    text-align: center;
-  }
-  
-  .profile-options button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    text-align: left;
-    color: white;
-    padding: 8px 15px;
-    font-size: 18px;
-    transition: background-color 0.3s;
-  }
-  
-  .profile-options button:hover {
-    background-color: #f0f0f0;
-    border-radius: 5px;
-  }
-  
-  .homepage-main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    text-align: center;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-    text-align: left;
-  }
-  
-  .homepage-footer {
-    background: linear-gradient(90deg, #182848, #4b6cb7);
-    color: white;
-    padding: 15px;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-  
-  .ghost-profile {
-    font-size: 40px;
-    display: inline-block;
-    background-color: #ff7e5f;
-    padding: 10px;
-    border-radius: 50%;
-    border: 2px solid white;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
 
-  .user-skills, .user-preferences {
-    margin-bottom: 20px;
-  }
-  
-  .user-skills h2, .user-preferences h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .user-skills p, .user-preferences p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 10px;
-  }
-  
-  .user-skills ul, .user-preferences ul {
-    list-style-type: disc;
-    padding-left: 20px;
-  }
-  
-  .user-skills li, .user-preferences li {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
-  .start-button {
-    display: block;
-    margin: 20px auto;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 10px;
-    background-color: #007bff;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-  }
-  
-  .start-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-  }
+.homepage-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+}
+
+.profile-menu {
+  position: relative;
+}
+
+.profile-icon {
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.profile-options {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+.profile-options button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.profile-options button:hover {
+  background: #f0f0f0;
+}
+
+/* Center the User Profiles Title */
+.user-profiles-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* Responsive Flexbox Layout for User Profiles */
+.user-profiles-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+/* Individual Profile Card */
+.user-profile-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Fixed width */
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.user-profile-card:hover {
+  transform: scale(1.05);
+}
+
+.user-profile-card h3 {
+  margin-bottom: 5px;
+  color: #007bff;
+}
+
+.user-profile-card p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* Footer Styling */
+.homepage-footer {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #555;
+}
