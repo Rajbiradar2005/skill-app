@@ -24,6 +24,12 @@ function App() {
       </header>
 
       <main className="App-main">
+      <img 
+        src="https://acegif.com/wp-content/uploads/gifs/handshake-46.gif" 
+        alt="Welcome" 
+        className="welcome-image" 
+        style={{ width: "300px", height: "300px" }} 
+      />
         <Routes>
           <Route path="/" element={<h2>Welcome to the Skill App</h2>} />
           <Route path="/login" element={<Login />} />

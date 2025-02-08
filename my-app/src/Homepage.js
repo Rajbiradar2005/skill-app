@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "./firebase";
 import { collection, getDocs } from "firebase/firestore";
 import "./Homepage.css";
@@ -8,16 +8,24 @@ import "./Homepage.css";
 const Homepage = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [users, setUsers] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track login state
   const navigate = useNavigate();
   const menuRef = useRef(null);
   const profileIconRef = useRef(null);
 
-  // Handle profile icon click
+  useEffect(() => {
+    // Listen for auth changes
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user); // Convert user object to boolean
+    });
+
+    return () => unsubscribe(); // Cleanup listener on unmount
+  }, []);
+
   const handleProfileClick = () => {
     setIsMenuVisible(!isMenuVisible);
   };
 
-  // Handle sign-out
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -27,23 +35,6 @@ const Homepage = () => {
     }
   };
 
-  // Handle edit profile
-  const handleEditProfile = () => {
-    navigate("/Profile");
-  };
-
-  // Close the menu when clicking outside
-  const handleClickOutside = (e) => {
-    if (
-      menuRef.current &&
-      !menuRef.current.contains(e.target) &&
-      !profileIconRef.current.contains(e.target)
-    ) {
-      setIsMenuVisible(false);
-    }
-  };
-
-  // Fetch users from Firestore
   const fetchUsers = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "users"));
@@ -54,41 +45,40 @@ const Homepage = () => {
     }
   };
 
-  // Add event listener for outside clicks & fetch users
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
     fetchUsers();
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
   }, []);
 
   return (
     <div className="homepage-container">
       <header className="homepage-header">
         <h1>Welcome to Skill App</h1>
-        <div className="profile-menu">
-          <div
-            className="profile-icon"
-            ref={profileIconRef}
-            onClick={handleProfileClick}
-          >
-            <span className="ghost-profile">👤</span>
+        
+        {/* Hide Login/Signup if authenticated */}
+        {!isAuthenticated && (
+          <div className="auth-buttons">
+            <button onClick={() => navigate("/login")}>Login</button>
+            <button onClick={() => navigate("/signup")}>Sign Up</button>
           </div>
-          {isMenuVisible && (
-            <div className="profile-options" ref={menuRef}>
-              <button onClick={handleEditProfile}>Edit Profile</button>
-              <button onClick={handleSignOut}>Sign Out</button>
+        )}
+
+        {isAuthenticated && (
+          <div className="profile-menu">
+            <div className="profile-icon" ref={profileIconRef} onClick={handleProfileClick}>
+              <span className="ghost-profile">👤</span>
             </div>
-          )}
-        </div>
+            {isMenuVisible && (
+              <div className="profile-options" ref={menuRef}>
+                <button onClick={() => navigate("/Profile")}>Edit Profile</button>
+                <button onClick={handleSignOut}>Sign Out</button>
+              </div>
+            )}
+          </div>
+        )}
       </header>
 
       <main className="homepage-main">
-        {/* Centered User Profiles Title */}
         <h2 className="user-profiles-title">User Profiles</h2>
-        
-        {/* Grid layout for user profiles */}
         <section className="user-profiles-grid">
           {users.length > 0 ? (
             users.map((user, index) => (
@@ -100,7 +90,6 @@ const Homepage = () => {
               </div>
             ))
           ) : (
-            // Show message if no user profiles found
             <p>No user profiles found.</p>
           )}
         </section>
