@@ -100,18 +100,18 @@ const Profile = () => {
             onChange={(e) => setFormData({ ...formData, offeredServices: e.target.value })}
           />
         ) : (
-          <p>{profile ? profile.offeredServices.join(", ") : "Loading..."}</p> {/* Check for profile */}
+          <p>{profile ? profile.offeredServices.join(", ") : "Loading..."}</p>
         )}
 
         <p><strong>Bio:</strong></p>
         {isEditing ? (
-          <textarea 
-            value={formData.bio} 
-            onChange={(e) => setFormData({ ...formData, bio: e.target.value })} 
-            rows="3"
+          <input 
+            type="text"
+            value={formData.bio}
+            onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
           />
         ) : (
-          <p>{profile ? profile.bio : "Loading..."}</p> {/* Check for profile */}
+          <p>{profile ? profile.bio : "Loading..."}</p>
         )}
       </div>
 
