@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
-import { auth } from "./firebase"; // Assuming firebase.js is in the parent folder
+import { auth, db } from "./firebase"; // Assuming firebase.js is in the parent folder
+import { collection, getDocs } from "firebase/firestore"; // Import Firestore functions
 import "./Homepage.css";
 
 const Homepage = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const menuRef = useRef(null); // Ref to track the menu div
   const profileIconRef = useRef(null); // Ref to track the profile icon
@@ -40,9 +42,21 @@ const Homepage = () => {
     }
   };
 
+  // Fetch users from Firestore
+  const fetchUsers = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      const usersList = querySnapshot.docs.map(doc => doc.data());
+      setUsers(usersList);
+    } catch (error) {
+      console.error("Error fetching users: ", error);
+    }
+  };
+
   // Add event listener to handle clicks outside of the profile menu
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
+    fetchUsers(); // Fetch users on component mount
     return () => {
       document.removeEventListener("mousedown", handleClickOutside); // Cleanup the listener
     };
@@ -69,23 +83,20 @@ const Homepage = () => {
         </div>
       </header>
       <main className="homepage-main">
-        <section className="user-skills">
-          <h2>Your Skills</h2>
-          <p>Here you can list your skills and expertise. Make sure to keep this section updated to showcase your abilities.</p>
-          <ul>
-            <li>Skill 1</li>
-            <li>Skill 2</li>
-            <li>Skill 3</li>
-          </ul>
-        </section>
-        <section className="user-preferences">
-          <h2>Your Preferences</h2>
-          <p>Specify your preferences for the types of services you are looking for. This helps us match you with the right opportunities.</p>
-          <ul>
-            <li>Preference 1</li>
-            <li>Preference 2</li>
-            <li>Preference 3</li>
-          </ul>
+        <section className="user-profiles">
+          <h2>User Profiles</h2>
+          {users.length > 0 ? (
+            users.map((user, index) => (
+              <div key={index} className="user-profile">
+                <h3>{user.name}</h3>
+                <p><strong>Email:</strong> {user.email}</p>
+                <p><strong>Offered Services:</strong> {user.offeredServices.join(", ")}</p>
+                <p><strong>Bio:</strong> {user.bio}</p>
+              </div>
+            ))
+          ) : (
+            <p>No user profiles found.</p>
+          )}
         </section>
         <button className="start-button" onClick={() => navigate("/start")}>
           Start
