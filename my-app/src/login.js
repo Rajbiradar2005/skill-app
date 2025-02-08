@@ -15,7 +15,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert('Login successful!');
-      navigate('/'); // Redirect to home page after login
+      navigate('/Profile'); // Redirect to home page after login
     } catch (error) {
       setError(error.message);
     }

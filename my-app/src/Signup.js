@@ -15,7 +15,7 @@ const Signup = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       alert('Signup successful!');
-      navigate('/'); // Redirect to home after successful signup
+      navigate('/Profile'); // Redirect to home after successful signup
     } catch (error) {
       setError(error.message);
     }
