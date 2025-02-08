@@ -34,7 +34,7 @@ function App() {
       </main>
 
       <footer className="App-footer">
-        <p>&copy; 2023 Skill App. All rights reserved.</p>
+        <p>&copy; 2025 Skill App. All rights reserved.</p>
       </footer>
     </div>
   );

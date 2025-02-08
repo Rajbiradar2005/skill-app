@@ -104,10 +104,6 @@ const Homepage = () => {
           )}
         </section>
       </main>
-
-      <footer className="homepage-footer">
-        <p>&copy; 2023 Skill App. All rights reserved.</p>
-      </footer>
     </div>
   );
 };
