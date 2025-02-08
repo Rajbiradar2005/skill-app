@@ -11,7 +11,6 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     bio: "",
     offeredServices: "",
-    requestedServices: "",
   });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); // Hook for navigation
@@ -26,14 +25,12 @@ const Profile = () => {
             name: currentUser.displayName || "User",
             email: currentUser.email,
             offeredServices: ["offered service"],
-            requestedServices: ["requested service"],
             bio: "This is my bio.",
           };
           setProfile(userProfile);
           setFormData({
             bio: userProfile.bio,
             offeredServices: userProfile.offeredServices.join(", "),
-            requestedServices: userProfile.requestedServices.join(", "),
           });
         }
       } catch (error) {
@@ -63,7 +60,6 @@ const Profile = () => {
     setFormData({
       bio: profile.bio,
       offeredServices: profile.offeredServices.join(", "),
-      requestedServices: profile.requestedServices.join(", "),
     });
     setIsEditing(false);
   };
@@ -75,7 +71,6 @@ const Profile = () => {
         ...profile,
         bio: formData.bio,
         offeredServices: formData.offeredServices.split(",").map((s) => s.trim()),
-        requestedServices: formData.requestedServices.split(",").map((s) => s.trim()),
       };
 
       // Example Firebase update function (Replace with actual API call)
@@ -106,17 +101,6 @@ const Profile = () => {
           />
         ) : (
           <p>{profile.offeredServices.join(", ")}</p>
-        )}
-
-        <p><strong>Requested Services:</strong></p>
-        {isEditing ? (
-          <input 
-            type="text"
-            value={formData.requestedServices}
-            onChange={(e) => setFormData({ ...formData, requestedServices: e.target.value })}
-          />
-        ) : (
-          <p>{profile.requestedServices.join(", ")}</p>
         )}
 
         <p><strong>Bio:</strong></p>
