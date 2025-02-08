@@ -69,7 +69,27 @@ const Homepage = () => {
         </div>
       </header>
       <main className="homepage-main">
-        <p>Here is your homepage content!</p>
+        <section className="user-skills">
+          <h2>Your Skills</h2>
+          <p>Here you can list your skills and expertise. Make sure to keep this section updated to showcase your abilities.</p>
+          <ul>
+            <li>Skill 1</li>
+            <li>Skill 2</li>
+            <li>Skill 3</li>
+          </ul>
+        </section>
+        <section className="user-preferences">
+          <h2>Your Preferences</h2>
+          <p>Specify your preferences for the types of services you are looking for. This helps us match you with the right opportunities.</p>
+          <ul>
+            <li>Preference 1</li>
+            <li>Preference 2</li>
+            <li>Preference 3</li>
+          </ul>
+        </section>
+        <button className="start-button" onClick={() => navigate("/start")}>
+          Start
+        </button>
       </main>
       <footer className="homepage-footer">
         <p>&copy; 2023 Skill App. All rights reserved.</p>
