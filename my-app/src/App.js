@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import Login from './login';
 import Signup from './Signup';
 import Profile from './Profile'; // Import Profile component
@@ -13,6 +13,10 @@ const PrivateRoute = ({ element }) => {
 };
 
 function App() {
+  const location = useLocation(); // Get the current route
+
+  console.log(location.pathname); // Check if location is correct
+
   return (
     <div className="App">
       <header className="App-header">
@@ -24,12 +28,16 @@ function App() {
       </header>
 
       <main className="App-main">
-      <img 
-        src="https://acegif.com/wp-content/uploads/gifs/handshake-46.gif" 
-        alt="Welcome" 
-        className="welcome-image" 
-        style={{ width: "300px", height: "300px" }} 
-      />
+        {/* Conditionally render the image only on the homepage */}
+        {location.pathname === '/' && (
+          <img 
+            src="https://acegif.com/wp-content/uploads/gifs/handshake-46.gif" 
+            alt="Welcome" 
+            className="welcome-image" 
+            style={{ width: "300px", height: "300px" }} 
+          />
+        )}
+
         <Routes>
           <Route path="/" element={<h2>Welcome to the Skill App</h2>} />
           <Route path="/login" element={<Login />} />
