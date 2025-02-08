@@ -100,6 +100,7 @@ const Homepage = () => {
               </div>
             ))
           ) : (
+            // Show message if no user profiles found
             <p>No user profiles found.</p>
           )}
         </section>

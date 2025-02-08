@@ -38,7 +38,7 @@ const Profile = () => {
             console.log("No profile found for this user.");
             // If no profile exists in Firestore, use defaults
             setProfile({
-              name: currentUser.displayName || "User",
+              name: currentUser.displayName || currentUser.email,
               email: currentUser.email,
               offeredServices: ["offered service"],
               bio: "This is my bio.",
