@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import Login from './Login';
+import Signup from './Signup';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav style={styles.navbar}>
+        <Link to="/login" style={styles.link}>Login</Link>
+        <Link to="/signup" style={styles.link}>Sign Up</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<h1>Welcome to the Skill App</h1>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
     </div>
   );
 }
+
+// Simple inline styles for navbar
+const styles = {
+  navbar: {
+    backgroundColor: '#282c34',
+    padding: '10px',
+    textAlign: 'center',
+  },
+  link: {
+    color: 'white',
+    margin: '10px',
+    textDecoration: 'none',
+    fontSize: '18px',
+  },
+};
 
 export default App;

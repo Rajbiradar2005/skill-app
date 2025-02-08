@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase'; // Ensure the path matches where your firebase.js is located
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase'; // Ensure the path is correct
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-const Login = () => {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize navigate function
 
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert('Login successful!');
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert('Signup successful!');
+      navigate('/'); // Redirect to home after successful signup
     } catch (error) {
       setError(error.message);
     }
@@ -19,9 +22,9 @@ const Login = () => {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Signup</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSignup}>
         <input
           type="email"
           placeholder="Email"
@@ -36,10 +39,10 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">Signup</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
