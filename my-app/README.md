@@ -1,3 +1,40 @@
+# 🚀 Skill Service App
+
+### 👥 Created by:
+- **Arnav Desai**
+- **Krish Kothari**
+- **Raj Biradar**
+
+## 📌 Overview
+
+The **Skill Service App** is a platform that connects individuals looking to exchange services. Users can **create profiles, list their skills, and find other users** to collaborate with. It is built with **React, Firebase Authentication, and Firestore**.
+
+---
+
+## ✨ Features
+
+✅ **User Authentication** - Secure login and signup with Firebase  
+✅ **Profile Management** - Users can update their bio and offered services  
+✅ **Service Listings** - View profiles of other users and their skills  
+✅ **Private Routes** - Restricts profile access to logged-in users  
+✅ **Real-time Firestore Database** - Fetches and updates user data dynamically  
+✅ **Responsive UI** - Mobile-friendly design  
+
+---
+
+## 🏗️ Tech Stack
+
+- **Frontend:** React (with React Router)  
+- **Backend:** Firebase Firestore  
+- **Authentication:** Firebase Authentication  
+- **Styling:** CSS (Flexbox & Grid)  
+
+---
+
+Description
+The Skill Service App is a platform where people offering services can get in touch; it was done in React. Users can sign up, show their skills, and search for others who provide the services needed. The App includes secure authentication using Firebase, data stored in real time with Firestore, and it's modern, responsively designed. Profiles showcase names, emails, offered services, and bios, thus letting users explore and discover potential matching of skills. The app will make sure that trading skills in will be smooth and efficient, built with React, Firebase Authentication, and Firestore.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
