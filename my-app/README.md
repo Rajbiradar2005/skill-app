@@ -1,28 +1,28 @@
-# 🚀 Skill Service App
+#  Skill Service App
 
 ### 👥 Created by:
 - **Arnav Desai**
 - **Krish Kothari**
 - **Raj Biradar**
 
-## 📌 Overview
+##  Overview
 
 The **Skill Service App** is a platform that connects individuals looking to exchange services. Users can **create profiles, list their skills, and find other users** to collaborate with. It is built with **React, Firebase Authentication, and Firestore**.
 
 ---
 
-## ✨ Features
+##  Features
 
-✅ **User Authentication** - Secure login and signup with Firebase  
-✅ **Profile Management** - Users can update their bio and offered services  
-✅ **Service Listings** - View profiles of other users and their skills  
-✅ **Private Routes** - Restricts profile access to logged-in users  
-✅ **Real-time Firestore Database** - Fetches and updates user data dynamically  
-✅ **Responsive UI** - Mobile-friendly design  
+**User Authentication** - Secure login and signup with Firebase  
+**Profile Management** - Users can update their bio and offered services  
+**Service Listings** - View profiles of other users and their skills  
+**Private Routes** - Restricts profile access to logged-in users  
+**Real-time Firestore Database** - Fetches and updates user data dynamically  
+**Responsive UI** - Mobile-friendly design  
 
 ---
 
-## 🏗️ Tech Stack
+##  Tech Stack
 
 - **Frontend:** React (with React Router)  
 - **Backend:** Firebase Firestore  
@@ -33,6 +33,16 @@ The **Skill Service App** is a platform that connects individuals looking to exc
 
 Description
 The Skill Service App is a platform where people offering services can get in touch; it was done in React. Users can sign up, show their skills, and search for others who provide the services needed. The App includes secure authentication using Firebase, data stored in real time with Firestore, and it's modern, responsively designed. Profiles showcase names, emails, offered services, and bios, thus letting users explore and discover potential matching of skills. The app will make sure that trading skills in will be smooth and efficient, built with React, Firebase Authentication, and Firestore.
+
+
+Challenges:
+1. Challenge 1: Faced the problem of immediate updating of Firebase authentication after a user had logged in.
+   - Solution (if found): Solved it by using Firebase Auth persistence to ensure that the state of  
+      the user's login was preserved on page reloads and reflected properly.
+2. Challenge 2: Firestore data was not showing up properly in the Browse page; it neither sorted nor paginated anything.
+   - Solution (if found): Used Firestore's querying features for sorting and pagination data. Now,    
+   the browsing page is well-structured, showing user preferences neat and without issues.
+
 
 
 # Getting Started with Create React App
