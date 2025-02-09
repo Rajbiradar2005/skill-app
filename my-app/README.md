@@ -1,6 +1,6 @@
 #  Skill Service App
 
-### 👥 Created by:
+### Created by:
 - **Arnav Desai**
 - **Krish Kothari**
 - **Raj Biradar**
