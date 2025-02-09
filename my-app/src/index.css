@@ -6,14 +6,16 @@ body {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   color: #333;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column;  /* Stack elements vertically */
+  justify-content: flex-start; /* Align items to the top */
+  align-items: center; /* Horizontally center the content */
+  min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
+/* Styling for the rest of your elements */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
   background-color: #f4f4f4;
   padding: 2px 4px;
   border-radius: 4px;
