@@ -1,42 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Routes, Route, Link, Navigate, useLocation } from 'react-router-dom';
 import Login from './login';
 import Signup from './Signup';
-import Profile from './Profile'; 
-import { auth } from './firebase'; 
+import Profile from './Profile'; // Import Profile component
+import { auth } from './firebase'; // Firebase auth import
 import './App.css';
 import Homepage from './Homepage';
 
+// Private route component
+const PrivateRoute = ({ element }) => {
+  return auth.currentUser ? element : <Navigate to="/login" />;
+};
+
 function App() {
   const location = useLocation(); // Get the current route
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication state
 
-  useEffect(() => {
-    // Check the user's authentication state
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsAuthenticated(!!user); // If user is logged in, set isAuthenticated to true
-    });
-
-    return () => unsubscribe(); // Cleanup listener on component unmount
-  }, []);
-
-  // Private route component for restricting access to Profile page
-  const PrivateRoute = ({ element }) => {
-    return isAuthenticated ? element : <Navigate to="/login" />;
-  };
+  console.log(location.pathname); // Check if location is correct
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Skill App</h1>
         <nav className="navbar">
-          {/* Show login/signup only if user is not authenticated */}
-          {!isAuthenticated && location.pathname !== '/Homepage' && location.pathname !== '/Profile' && (
-            <>
-              <Link to="/login" className="nav-link">Login</Link>
-              <Link to="/signup" className="nav-link">Sign Up</Link>
-            </>
-          )}
+          <Link to="/login" className="nav-link">Login</Link>
+          <Link to="/signup" className="nav-link">Sign Up</Link>
         </nav>
       </header>
 
@@ -56,7 +43,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/Profile" element={<PrivateRoute element={<Profile />} />} /> {/* Restricted route */}
-          <Route path="/Homepage" element={<Homepage />} /> {/* Homepage route */}
+          <Route path="/Homepage" element={<Homepage />} /> {/* Add the homepage route */}
         </Routes>
       </main>
 
